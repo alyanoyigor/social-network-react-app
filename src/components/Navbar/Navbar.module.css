@@ -2,9 +2,10 @@
 	grid-area: nav;
 	background-color: violet;
   }
-.item {
+.item a {
 	  color: white;
+	  text-decoration: none;
   }
-.item.active {
+.item a.active {
 	color: blue
 }

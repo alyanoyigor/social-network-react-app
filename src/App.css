@@ -12,5 +12,5 @@
 
 .app-wrapper-content {
 	grid-area: content;
-	background-color: grey;
+	background-color: rgb(166, 129, 201);
   }
