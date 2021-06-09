@@ -1,11 +1,15 @@
 .nav {
-	grid-area: nav;
-	background-color: violet;
-  }
+  grid-area: nav;
+  background-color: violet;
+  padding: 20px;
+}
+.item {
+  padding: 4px;
+}
 .item a {
-	  color: white;
-	  text-decoration: none;
-  }
+  color: white;
+  text-decoration: none;
+}
 .item a.active {
-	color: blue
+  color: darkblue;
 }
