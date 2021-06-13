@@ -1,21 +1,29 @@
+import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
- 
   let postsElements = props.postsData.map((p) => (
     <Post message={p.message} likes={p.likes} />
   ));
+
+  let newPostEl = React.createRef();
+  function addNewPost() {
+    let text = newPostEl.current.value;
+    alert(text);
+  }
 
   return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea></textarea>
+          <textarea ref={newPostEl}></textarea>
         </div>
         <div>
-          <button className={s.button}>Send</button>
+          <button onClick={addNewPost} className={s.button}>
+            Send
+          </button>
           <button className={s.button}>Delete</button>
         </div>
       </div>

@@ -23,5 +23,14 @@
   border-radius: 15px;
   background-color: white;
   display: inline-block;
-  margin-right: 10px;
+}
+.messageBlock {
+  margin: 20px 0px 0px 0px;
+}
+.formSendMessage {
+  grid-column: 2;
+  text-align: right;
+}
+.newMessageElem {
+  width: 100%;
 }
