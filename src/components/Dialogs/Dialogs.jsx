@@ -14,14 +14,14 @@ const Dialogs = (props) => {
   let newMessageElem = React.createRef();
   function sendNewMessage() {
     let text = newMessageElem.current.value;
-    alert(text);
+    props.sendMessage(text);
   }
 
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>{messagesElements}</div>
-      <div className={s.formSendMessage}>
+      <div className={s.sendMessageBlock}>
         <textarea className={s.newMessageElem} ref={newMessageElem}></textarea>
         <button onClick={sendNewMessage}>Send</button>
       </div>

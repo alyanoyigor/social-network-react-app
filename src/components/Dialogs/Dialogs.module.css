@@ -27,7 +27,7 @@
 .messageBlock {
   margin: 20px 0px 0px 0px;
 }
-.formSendMessage {
+.sendMessageBlock {
   grid-column: 2;
   text-align: right;
 }
