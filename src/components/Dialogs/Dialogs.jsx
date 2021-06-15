@@ -15,6 +15,7 @@ const Dialogs = (props) => {
   function sendNewMessage() {
     let text = newMessageElem.current.value;
     props.sendMessage(text);
+    newMessageElem.current.value = "";
   }
 
   return (
