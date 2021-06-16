@@ -8,28 +8,31 @@ const MyPosts = (props) => {
   ));
 
   let newPostEl = React.createRef();
-  function addNewPost() {
+
+  let addNewPost = () => {
+    props.addPost();
+  };
+  let onPostChange = () => {
     let text = newPostEl.current.value;
-    props.addPost(text);
-    newPostEl.current.value = "";
-  }
-  function deleteText() {
-    newPostEl.current.value = "";
-  }
+    props.updateNewPostText(text);
+  };
 
   return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea ref={newPostEl} cols="80" rows="5"></textarea>
+          <textarea
+            onChange={onPostChange}
+            value={props.newPostText}
+            ref={newPostEl}
+            cols="80"
+            rows="5"
+          />
         </div>
         <div>
           <button onClick={addNewPost} className={s.button}>
             Send
-          </button>
-          <button onClick={deleteText} className={s.button}>
-            Delete
           </button>
         </div>
       </div>
