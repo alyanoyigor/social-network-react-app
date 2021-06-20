@@ -1,7 +1,44 @@
 const SEND_MESSAGE = "SEND-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
-let dialogsReducer = (state, action) => {
+const dialogsReducer = (
+  state = {
+    dialogsData: [
+      {
+        id: 1,
+        img: "https://randomuser.me/api/portraits/women/81.jpg",
+        name: "Maria",
+      },
+      {
+        id: 2,
+        img: "https://randomuser.me/api/portraits/men/64.jpg",
+        name: "Alex",
+      },
+      {
+        id: 3,
+        img: "https://randomuser.me/api/portraits/women/4.jpg",
+        name: "Karina",
+      },
+      {
+        id: 4,
+        img: "https://randomuser.me/api/portraits/men/55.jpg",
+        name: "Victor",
+      },
+      {
+        id: 5,
+        img: "https://randomuser.me/api/portraits/women/64.jpg",
+        name: "Ann",
+      },
+    ],
+    messagesData: [
+      { id: 1, message: "Hello!" },
+      { id: 2, message: "How are you?" },
+      { id: 3, message: "Hey nice weather today isn't it?" },
+    ],
+    newMessageText: "",
+  },
+  action
+) => {
   switch (action.type) {
     case SEND_MESSAGE:
       let newMessage = {
