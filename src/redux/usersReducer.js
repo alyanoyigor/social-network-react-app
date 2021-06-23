@@ -5,6 +5,7 @@ const initialState = {
   users: [
     {
       id: 1,
+      img: "https://s3.r29static.com/bin/entry/75b/0,112,2000,2000/x,80/1882682/image.jpg",
       followed: true,
       fullname: "Igor",
       status: "I'm learn ReactJS",
@@ -12,16 +13,18 @@ const initialState = {
     },
     {
       id: 2,
+      img: "https://s3.r29static.com/bin/entry/75b/0,112,2000,2000/x,80/1882682/image.jpg",
       followed: false,
       fullname: "Andrew",
       status: "Axaaxaxa i'm crazy guy!",
-      location: { city: "Ternopil", country: "Ukraine" },
+      location: { city: "Kiev", country: "Ukraine" },
     },
     {
       id: 3,
+      img: "https://s3.r29static.com/bin/entry/75b/0,112,2000,2000/x,80/1882682/image.jpg",
       followed: true,
       fullname: "Vita",
-      status: "I'm hottest girl in the world not a Linda.",
+      status: "Hello everyone!",
       location: { city: "Lviv", country: "Ukraine" },
     },
   ],
@@ -34,11 +37,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         users: state.users.map((user) => {
           if (user.id === action.id) {
-            if (user.followed) {
-              return { ...user, followed: false };
-            } else {
-              return { ...user, followed: true };
-            }
+            return { ...user, followed: !user.followed };
           }
           return user;
         }),
