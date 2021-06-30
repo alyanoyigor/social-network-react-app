@@ -1,35 +1,8 @@
 const TOGGLE_FOLLOW = "TOGGLE-FOLLOW";
 const SET_USERS = "SET-USERS";
-
-const initialState = {
-  users: [
-    {
-      id: 1,
-      img: "https://s3.r29static.com/bin/entry/75b/0,112,2000,2000/x,80/1882682/image.jpg",
-      followed: true,
-      fullname: "Igor",
-      status: "I'm learn ReactJS",
-      location: { city: "LA", country: "USA" },
-    },
-    {
-      id: 2,
-      img: "https://s3.r29static.com/bin/entry/75b/0,112,2000,2000/x,80/1882682/image.jpg",
-      followed: false,
-      fullname: "Andrew",
-      status: "Axaaxaxa i'm crazy guy!",
-      location: { city: "Kiev", country: "Ukraine" },
-    },
-    {
-      id: 3,
-      img: "https://s3.r29static.com/bin/entry/75b/0,112,2000,2000/x,80/1882682/image.jpg",
-      followed: true,
-      fullname: "Vita",
-      status: "Hello everyone!",
-      location: { city: "Lviv", country: "Ukraine" },
-    },
-  ],
+let initialState = {
+  users: [],
 };
-
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_FOLLOW:
