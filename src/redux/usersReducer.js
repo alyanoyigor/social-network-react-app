@@ -36,7 +36,7 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: state.users.map((user) => {
-          if (user.id === action.id) {
+          if (user.id === action.userId) {
             return { ...user, followed: !user.followed };
           }
           return user;
@@ -51,7 +51,10 @@ const usersReducer = (state = initialState, action) => {
       return state;
   }
 };
-export const toggleFollowAC = (id) => ({ type: TOGGLE_FOLLOW, userId: id });
+export const toggleFollowAC = (id) => ({
+  type: TOGGLE_FOLLOW,
+  userId: id,
+});
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
 
 export default usersReducer;

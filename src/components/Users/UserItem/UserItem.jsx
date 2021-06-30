@@ -1,7 +1,6 @@
 import s from "./UserItem.module.css";
 
 const UsersItem = (props) => {
-  debugger  
   return (
     <div className={s.users}>
       <img src={props.img} alt="" />

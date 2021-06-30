@@ -1,7 +1,6 @@
 import UsersItem from "./UserItem/UserItem";
 
 const Users = (props) => {
-  debugger;
   let usersElements = props.usersPage.map((u) => (
     <UsersItem
       id={u.id}
