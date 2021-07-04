@@ -3,15 +3,12 @@ import axios from "axios";
 import UsersItem from "./UserItem/UserItem";
 
 class Users extends React.Component {
-  constructor(props) {
-    super(props);
-    if (this.props.usersPage.length === 0) {
-      axios
-        .get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((response) => {
-          this.props.setUsers(response.data.items);
-        });
-    }
+  componentDidMount() {
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
   }
   render() {
     let usersElements = this.props.usersPage.map((u) => (
