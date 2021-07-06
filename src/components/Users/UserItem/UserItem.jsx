@@ -1,4 +1,4 @@
-import s from "./UserItem.module.css";
+import s from "./../User.module.css";
 import userImage from "./../../../assets/img/image.webp";
 const UsersItem = (props) => {
   return (
