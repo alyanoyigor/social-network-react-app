@@ -10,12 +10,9 @@ const UsersItem = (props) => {
           src={props.photos.small != null ? props.photos.small : userImage}
           alt=""
         />
-        <div>{props.name}</div>
+        <p>{props.name}</p>
       </NavLink>
-      <div>{props.status}</div>
-      <div>
-        {"props.location.city"}, {"props.location.country"}
-      </div>
+      <p>{props.status}</p>
       <div>
         {props.followed ? (
           <button onClick={() => props.followedToggleUsers(props.id)}>

@@ -1,5 +1,8 @@
 import s from "./ProfileInfo.module.css";
 import Preloader from "./../../common/Preloader/Preloader";
+import Facebook from "./../../../assets/img/facebook.svg";
+import yes from "./../../../assets/img/yes.svg";
+import no from "./../../../assets/img/no.svg";
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -12,6 +15,16 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.avatar}>
         <img src={props.profile.photos.large} />
+        <h1>{props.profile.fullName}</h1>
+        <p>{props.profile.aboutMe}</p>
+        <div className={s.facebook}>
+          {props.profile.contacts.facebook ? <img src={Facebook} /> : null}
+          <span>{props.profile.contacts.facebook}</span>
+        </div>
+        <div>
+          <span>Looking for a job: </span>
+          {props.profile.lookingForAJob ? <img src={yes} /> : <img src={no} />}
+        </div>
       </div>
     </div>
   );

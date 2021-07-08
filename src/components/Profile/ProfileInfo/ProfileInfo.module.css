@@ -1,3 +1,23 @@
 .avatar {
   padding: 10px;
 }
+
+.avatar>img {
+  border-radius: 9999px;
+}
+
+h1 {
+  margin: 0 0 10px 0;
+}
+
+p {
+  margin: 0 0 0 0;
+}
+
+.facebook {
+  margin: 10px 0 10px 0;
+}
+
+.facebook img {
+  margin: 0 5px 0 0;
+}
