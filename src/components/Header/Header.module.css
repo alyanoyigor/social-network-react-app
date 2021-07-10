@@ -1,9 +1,17 @@
 .header {
-	grid-area: header;
-	background: rgb(78, 0, 48);
-  }
+  grid-area: header;
+  background: rgb(78, 0, 48);
+}
 .header img {
-	width: 40px;
-	height: 40px;
-  }
-  
+  width: 40px;
+  height: 40px;
+}
+
+.login {
+  float: right;
+  color: red;
+}
+.login a {
+  color: white;
+  text-decoration: none;
+}
