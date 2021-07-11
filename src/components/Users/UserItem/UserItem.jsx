@@ -1,7 +1,7 @@
 import s from "./../User.module.css";
 import userImage from "./../../../assets/img/image.webp";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import { usersAPI } from "../../api/api";
 
 const UsersItem = (props) => {
   return (
@@ -18,20 +18,9 @@ const UsersItem = (props) => {
         {props.followed ? (
           <button
             onClick={() => {
-              axios
-                .delete(
-                  `https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
-                  {
-                    withCredentials: true,
-                    headers: {
-                      "API-KEY": "495fe8d9-a4d5-413f-b24a-9c5f77cd6403",
-                    },
-                  }
-                )
-                .then((response) => {
-                  if (response.data.resultCode === 0)
-                    props.followedToggleUsers(props.id);
-                });
+              usersAPI.unfollow(props.id).then((data) => {
+                if (data.resultCode === 0) props.followedToggleUsers(props.id);
+              });
             }}
           >
             Unfollow
@@ -39,21 +28,9 @@ const UsersItem = (props) => {
         ) : (
           <button
             onClick={() =>
-              axios
-                .post(
-                  `https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
-                  {},
-                  {
-                    withCredentials: true,
-                    headers: {
-                      "API-KEY": "495fe8d9-a4d5-413f-b24a-9c5f77cd6403",
-                    },
-                  }
-                )
-                .then((response) => {
-                  if (response.data.resultCode === 0)
-                    props.followedToggleUsers(props.id);
-                })
+              usersAPI.follow(props.id).then((data) => {
+                if (data.resultCode === 0) props.followedToggleUsers(props.id);
+              })
             }
           >
             Follow
