@@ -26,6 +26,8 @@ const Users = (props) => {
       location={u.location}
       followed={u.followed}
       followedToggleUsers={props.followedToggleUsers}
+      toggleFollowingInProgress={props.toggleFollowingInProgress}
+      followingInProgress={props.followingInProgress}
     />
   ));
 
