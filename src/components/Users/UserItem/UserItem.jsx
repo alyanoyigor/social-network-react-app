@@ -1,7 +1,6 @@
 import s from "./../User.module.css";
 import userImage from "./../../../assets/img/image.webp";
 import { NavLink } from "react-router-dom";
-import { usersAPI } from "../../api/api";
 
 const UsersItem = (props) => {
   return (
@@ -18,26 +17,14 @@ const UsersItem = (props) => {
         {props.followed ? (
           <button
             disabled={props.followingInProgress.some((id) => id === props.id)}
-            onClick={() => {
-              props.toggleFollowingInProgress(true, props.id);
-              usersAPI.unfollow(props.id).then((data) => {
-                if (data.resultCode === 0) props.followedToggleUsers(props.id);
-                props.toggleFollowingInProgress(false, props.id);
-              });
-            }}
+            onClick={() => props.unfollow(props.id)}
           >
             Unfollow
           </button>
         ) : (
           <button
             disabled={props.followingInProgress.some((id) => id === props.id)}
-            onClick={() => {
-              props.toggleFollowingInProgress(true, props.id);
-              usersAPI.follow(props.id).then((data) => {
-                if (data.resultCode === 0) props.followedToggleUsers(props.id);
-                props.toggleFollowingInProgress(false, props.id);
-              });
-            }}
+            onClick={() => props.follow(props.id)}
           >
             Follow
           </button>
