@@ -1,4 +1,4 @@
-import { usersAPI } from "../components/api/api";
+import { followAPI, usersAPI } from "../components/api/api";
 
 const TOGGLE_FOLLOW = "TOGGLE-FOLLOW";
 const SET_USERS = "SET-USERS";
@@ -88,7 +88,7 @@ export const getUsers = (currentUsersPage, pageUsersCount) => (dispatch) => {
 
 export const follow = (id) => (dispatch) => {
   dispatch(toggleFollowingInProgress(true, id));
-  usersAPI.follow(id).then((data) => {
+  followAPI.follow(id).then((data) => {
     if (data.resultCode === 0) dispatch(followedToggleUsers(id));
     dispatch(toggleFollowingInProgress(false, id));
   });
@@ -96,7 +96,7 @@ export const follow = (id) => (dispatch) => {
 
 export const unfollow = (id) => (dispatch) => {
   dispatch(toggleFollowingInProgress(true, id));
-  usersAPI.unfollow(id).then((data) => {
+  followAPI.unfollow(id).then((data) => {
     if (data.resultCode === 0) dispatch(followedToggleUsers(id));
     dispatch(toggleFollowingInProgress(false, id));
   });

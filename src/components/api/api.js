@@ -17,15 +17,18 @@ export const usersAPI = {
       .get(`/users?page=${page}&count=${pageUsersCount}`)
       .then((response) => response.data),
 
+  updateUserProfile: (id) =>
+    instance.get(`/profile/${id}`).then((response) => response.data),
+};
+
+export const authAPI = {
+  me: () => instance.get("/auth/me").then((response) => response.data.data),
+};
+
+export const followAPI = {
   unfollow: (id) =>
     instance.delete(`/follow/${id}`).then((response) => response.data),
 
   follow: (id) =>
     instance.post(`/follow/${id}`).then((response) => response.data),
-
-  authorization: () =>
-    instance.get("/auth/me").then((response) => response.data.data),
-
-  updateUserProfile: (id) =>
-    instance.get(`/profile/${id}`).then((response) => response.data),
 };
