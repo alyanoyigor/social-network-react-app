@@ -15,3 +15,6 @@
   color: white;
   text-decoration: none;
 }
+.login a.active {
+  display: none;
+}
