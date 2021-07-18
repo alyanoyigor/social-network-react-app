@@ -7,7 +7,7 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-  updateUsers: (currentUsersPage, pageUsersCount) =>
+  getUsers: (currentUsersPage, pageUsersCount) =>
     instance
       .get(`/users?page=${currentUsersPage}&count=${pageUsersCount}`)
       .then((response) => response.data),
@@ -22,7 +22,7 @@ export const usersAPI = {
 };
 
 export const authAPI = {
-  me: () => instance.get("/auth/me").then((response) => response.data.data),
+  me: () => instance.get("/auth/me").then((response) => response.data),
 };
 
 export const followAPI = {

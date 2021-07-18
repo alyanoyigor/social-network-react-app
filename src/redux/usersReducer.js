@@ -1,4 +1,4 @@
-import { followAPI, usersAPI } from "../components/api/api";
+import { followAPI, usersAPI } from "../api/api";
 
 const TOGGLE_FOLLOW = "TOGGLE-FOLLOW";
 const SET_USERS = "SET-USERS";
@@ -79,7 +79,7 @@ export const toggleFollowingInProgress = (isFetching, userId) => ({
 export const getUsers = (currentUsersPage, pageUsersCount) => (dispatch) => {
   dispatch(toggleIsFetching(true));
   dispatch(setCurrentUsersPage(currentUsersPage));
-  usersAPI.updateUsers(currentUsersPage, pageUsersCount).then((data) => {
+  usersAPI.getUsers(currentUsersPage, pageUsersCount).then((data) => {
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsersCount(data.totalCount));

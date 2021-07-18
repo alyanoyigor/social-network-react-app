@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { setUserProfile } from "../../redux/profileReducer";
-import { usersAPI } from "../api/api";
+import { usersAPI } from "../../api/api";
 import Profile from "./Profile";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -22,11 +23,9 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  return { profile: state.profilePage.profile };
+  return { profile: state.profilePage.profile, isAuth: state.auth.isAuth };
 };
 
-const ProfileAPIContainer = withRouter(ProfileContainer);
-
 export default connect(mapStateToProps, { setUserProfile })(
-  ProfileAPIContainer
+  withRouter(withAuthRedirect(ProfileContainer))
 );
