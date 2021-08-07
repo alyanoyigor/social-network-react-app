@@ -11,16 +11,34 @@ const LoginPage = () => {
 };
 
 const LoginForm = () => {
+  let initialValues = {
+    login: "",
+    password: "",
+    checkbox: false,
+  };
+
+  let onSubmit = (values) => {
+    console.log(values);
+  };
+
+  let validate = (values) => {
+    let errors = {};
+
+    if (!values.login) {
+      errors.login = "Required";
+    }
+    if (!values.password) {
+      errors.password = "Required";
+    }
+    return errors;
+  };
+
   const formik = useFormik({
-    initialValues: {
-      login: "",
-      password: "",
-      checkbox: false,
-    },
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+    initialValues,
+    onSubmit,
+    validate,
+  }); 
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
@@ -30,8 +48,12 @@ const LoginForm = () => {
           id="login"
           name="login"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.login}
         />
+        {formik.touched.login && formik.errors.login ? (
+          <span style={{ color: "red" }}>{formik.errors.login}</span>
+        ) : null}
       </div>
       <div>
         <label htmlFor="password">Password</label>
@@ -40,9 +62,13 @@ const LoginForm = () => {
           type="password"
           id="password"
           name="password"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}
         />
+        {formik.touched.password && formik.errors.password ? (
+          <span style={{ color: "red" }}>{formik.errors.password}</span>
+        ) : null}
       </div>
       <div>
         <input
