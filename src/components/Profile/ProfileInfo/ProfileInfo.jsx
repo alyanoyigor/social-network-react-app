@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
   return (
     <div>
       <div className={s.avatar}>
-        <img src={props.profile.photos.large} />
+        <img src={props.profile.photos.large} alt="profile" />
         <h1>{props.profile.fullName}</h1>
 
         <ProfileStatus
@@ -26,14 +26,18 @@ const ProfileInfo = (props) => {
 
         {props.profile.contacts.facebook ? (
           <div className={s.facebook}>
-            <img src={Facebook} />
+            <img src={Facebook} alt="facebook" />
             <span>{props.profile.contacts.facebook}</span>
           </div>
         ) : null}
 
         <div>
           <span>Looking for a job: </span>
-          {props.profile.lookingForAJob ? <img src={yes} /> : <img src={no} />}
+          {props.profile.lookingForAJob ? (
+            <img src={yes} alt="yes" />
+          ) : (
+            <img src={no} alt="no" />
+          )}
         </div>
       </div>
     </div>
