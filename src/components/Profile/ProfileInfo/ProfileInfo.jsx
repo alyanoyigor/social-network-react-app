@@ -12,7 +12,9 @@ const ProfileInfo = (props) => {
   return (
     <div>
       <div className={s.avatar}>
-        <img src={props.profile.photos.large} alt="profile" />
+        {props.profile.photos.large ? (
+          <img src={props.profile.photos.large} alt="profile" />
+        ) : null}
         <h1>{props.profile.fullName}</h1>
 
         <ProfileStatus
