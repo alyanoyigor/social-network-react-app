@@ -1,4 +1,4 @@
-import { withFormik } from "formik";
+import { ErrorMessage, Field, Form, withFormik } from "formik";
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
@@ -23,30 +23,13 @@ const MyPosts = (props) => {
 };
 
 const AddPostForm = (props) => {
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-  } = props;
+  const { errors, isSubmitting } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <Form>
       <div>
-        <textarea
-          name="newPostText"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.newPostText}
-          cols="80"
-          rows="5"
-        />
+        <Field name="newPostText" as="textarea" cols="80" rows="4" />
       </div>
-      {errors.newPostText && touched.newPostText && (
-        <div id="feedback">{errors.newPostText}</div>
-      )}
+      <ErrorMessage name="newPostText" component="div" />
       <div>
         <button
           type="submit"
@@ -56,7 +39,7 @@ const AddPostForm = (props) => {
           Send
         </button>
       </div>
-    </form>
+    </Form>
   );
 };
 

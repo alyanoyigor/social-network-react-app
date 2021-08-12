@@ -1,4 +1,4 @@
-import { withFormik } from "formik";
+import { ErrorMessage, Field, Form, withFormik } from "formik";
 import React from "react";
 import s from "./Dialogs.module.css";
 import DialogUserItem from "./DialogUserItem/DialogUserItem";
@@ -27,31 +27,15 @@ const Dialogs = (props) => {
 };
 
 const DialogsForm = (props) => {
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-  } = props;
+  const { errors, isSubmitting } = props;
   return (
-    <form onSubmit={handleSubmit} className={s.sendMessageBlock}>
-      <textarea
-        name="message"
-        className={s.newMessageElem}
-        onChange={handleChange}
-        value={values.message}
-        onBlur={handleBlur}
-      />
-      {errors.message && touched.message && (
-        <div id="feedback">{errors.message}</div>
-      )}
+    <Form className={s.sendMessageBlock}>
+      <Field as="textarea" name="message" className={s.newMessageElem} />
+      <ErrorMessage name="message" component="div" />
       <button type="submit" disabled={isSubmitting || errors.message}>
         Send
       </button>
-    </form>
+    </Form>
   );
 };
 
