@@ -1,6 +1,5 @@
-import { Field, withFormik } from "formik";
+import { withFormik } from "formik";
 import React from "react";
-import { sendNewMessage } from "../../redux/dialogsReducer";
 import s from "./Dialogs.module.css";
 import DialogUserItem from "./DialogUserItem/DialogUserItem";
 import Message from "./Message/Message";
