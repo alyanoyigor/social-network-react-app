@@ -1,4 +1,6 @@
+import { Field, withFormik } from "formik";
 import React from "react";
+import { sendNewMessage } from "../../redux/dialogsReducer";
 import s from "./Dialogs.module.css";
 import DialogUserItem from "./DialogUserItem/DialogUserItem";
 import Message from "./Message/Message";
@@ -11,32 +13,63 @@ const Dialogs = (props) => {
     <Message message={m.message} />
   ));
 
-  let newMessageElem = React.createRef();
-
-  let sendNewMessage = () => {
-    props.sendNewMessage();
-  };
-
-  let onMessageChange = () => {
-    let text = newMessageElem.current.value;
-    props.onMessageChange(text);
+  let handleSubmit = (values, { setSubmitting }) => {
+    props.sendNewMessage(values.message);
+    setSubmitting(false);
   };
 
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>{messagesElements}</div>
-      <div className={s.sendMessageBlock}>
-        <textarea
-          className={s.newMessageElem}
-          ref={newMessageElem}
-          onChange={onMessageChange}
-          value={props.dialogsPage.newMessageText}
-        />
-        <button onClick={sendNewMessage}>Send</button>
-      </div>
+      <DialogsFormWithFormik handleSubmit={handleSubmit} />
     </div>
   );
+};
+
+const DialogsForm = (props) => {
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  } = props;
+  return (
+    <form onSubmit={handleSubmit} className={s.sendMessageBlock}>
+      <textarea
+        name="message"
+        className={s.newMessageElem}
+        onChange={handleChange}
+        value={values.message}
+        onBlur={handleBlur}
+      />
+      {errors.message && touched.message && (
+        <div id="feedback">{errors.message}</div>
+      )}
+      <button type="submit" disabled={isSubmitting || errors.message}>
+        Send
+      </button>
+    </form>
+  );
+};
+
+const DialogsFormWithFormik = (props) => {
+  let { handleSubmit } = props;
+  let FormikForm = withFormik({
+    mapPropsToValues: () => ({ message: "" }),
+    validate: (values) => {
+      const errors = {};
+      if (!values.message) {
+        errors.message = "Required";
+      }
+      return errors;
+    },
+    handleSubmit,
+  })(DialogsForm);
+  return <FormikForm />;
 };
 
 export default Dialogs;

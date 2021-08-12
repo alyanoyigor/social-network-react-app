@@ -43,7 +43,7 @@ const LoginForm = () => {
         </div>
         <div>
           <Field type="checkbox" id="checkbox" name="checkbox" />
-          <label htmlFor="checkbox">Remeber me</label>
+          <label htmlFor="checkbox">Remember me</label>
         </div>
         <div>
           <button type="submit">Log in</button>

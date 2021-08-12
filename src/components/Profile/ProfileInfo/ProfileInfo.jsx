@@ -23,7 +23,7 @@ const ProfileInfo = (props) => {
         />
 
         {props.profile.aboutMe ? (
-          <p style={{ marginTop: "10px" }}>About me: {props.profile.aboutMe}</p>
+          <p id={s.aboutMe}>About me: {props.profile.aboutMe}</p>
         ) : null}
 
         {props.profile.contacts.facebook ? (
