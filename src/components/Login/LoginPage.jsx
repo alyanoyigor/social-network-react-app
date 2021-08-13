@@ -1,21 +1,27 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { connect } from "react-redux";
+import { login } from "../../redux/authReducer";
+import { Redirect } from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   let initialValues = {
-    login: "",
+    email: "",
     password: "",
     checkbox: false,
   };
 
-  let onSubmit = (values) => {
-    console.log(values);
+  let onSubmit = (values, { setSubmitting, resetForm }) => {
+    const { email, password, rememberMe } = values;
+    props.login(email, password, rememberMe);
+    resetForm({ values: { email: "", password: "", checkbox: false } });
+    setSubmitting(false);
   };
 
   let validate = (values) => {
     let errors = {};
-    if (!values.login) {
-      errors.login = "Required";
+    if (!values.email) {
+      errors.email = "Required";
     }
     if (!values.password) {
       errors.password = "Required";
@@ -31,9 +37,9 @@ const LoginForm = () => {
     >
       <Form>
         <div>
-          <label htmlFor="login">Login</label> <br />
-          <Field type="login" id="login" name="login" />
-          <ErrorMessage name="login" />
+          <label htmlFor="email">Login</label> <br />
+          <Field type="email" id="email" name="email" />
+          <ErrorMessage name="email" />
         </div>
         <div>
           <label htmlFor="password">Password</label>
@@ -42,8 +48,8 @@ const LoginForm = () => {
           <ErrorMessage name="password" />
         </div>
         <div>
-          <Field type="checkbox" id="checkbox" name="checkbox" />
-          <label htmlFor="checkbox">Remember me</label>
+          <Field type="checkbox" id="rememberMe" name="rememberMe" />
+          <label htmlFor="rememberMe">Remember me</label>
         </div>
         <div>
           <button type="submit">Log in</button>
@@ -52,12 +58,18 @@ const LoginForm = () => {
     </Formik>
   );
 };
-const LoginPage = () => {
+const LoginPage = (props) => {
+  if (props.isAuth) return <Redirect to="/profile" />;
   return (
     <div>
       <h1>Login</h1>
-      <LoginForm />
+      <LoginForm login={props.login} />
     </div>
   );
 };
-export default LoginPage;
+
+const mapStateToProps = (state) => {
+  return { isAuth: state.auth.isAuth };
+};
+
+export default connect(mapStateToProps, { login })(LoginPage);
