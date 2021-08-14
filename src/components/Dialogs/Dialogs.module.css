@@ -34,3 +34,6 @@
 .newMessageElem {
   width: 100%;
 }
+.error {
+  border: 2px solid #d8000c;
+}

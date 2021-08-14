@@ -1,0 +1,13 @@
+.error {
+  border: 2px solid #d8000c;
+}
+label {
+  font-weight: 500;
+}
+.rememberMeText {
+  font-size: 12px;
+}
+.rememberMe {
+  display: inline-flex;
+  align-items: center;
+}

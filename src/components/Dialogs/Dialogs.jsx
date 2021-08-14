@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
+import { Error } from "../formik/ErrorMessage";
 import s from "./Dialogs.module.css";
 import DialogUserItem from "./DialogUserItem/DialogUserItem";
 import Message from "./Message/Message";
@@ -43,16 +44,20 @@ const DialogsForm = (props) => {
       onSubmit={props.onSubmit}
     >
       {(formik) => {
-        const { isSubmitting, errors } = formik;
+        const { isSubmitting, errors, touched } = formik;
         return (
           <Form className={s.sendMessageBlock}>
             <Field
               as="textarea"
               id="message"
               name="message"
-              className={s.newMessageElem}
+              className={
+                (errors.message && touched.message ? s.error : "") +
+                " " +
+                s.newMessageElem
+              }
             />
-            <ErrorMessage name="message" component="div" />
+            <ErrorMessage name="message" component={Error} />
             <button type="submit" disabled={isSubmitting || errors.message}>
               Send
             </button>

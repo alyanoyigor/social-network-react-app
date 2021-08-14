@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { connect } from "react-redux";
 import { login } from "../../redux/authReducer";
 import { Redirect } from "react-router-dom";
+import { Error } from "../formik/ErrorMessage";
+import s from "./LoginPage.module.css";
 
 const LoginForm = (props) => {
   let initialValues = {
@@ -35,26 +37,48 @@ const LoginForm = (props) => {
       validate={validate}
       onSubmit={onSubmit}
     >
-      <Form>
-        <div>
-          <label htmlFor="email">Login</label> <br />
-          <Field type="email" id="email" name="email" />
-          <ErrorMessage name="email" />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <br />
-          <Field type="password" id="password" name="password" />
-          <ErrorMessage name="password" />
-        </div>
-        <div>
-          <Field type="checkbox" id="rememberMe" name="rememberMe" />
-          <label htmlFor="rememberMe">Remember me</label>
-        </div>
-        <div>
-          <button type="submit">Log in</button>
-        </div>
-      </Form>
+      {(formik) => {
+        const { values, isSubmitting, errors, touched } = formik;
+        return (
+          <Form>
+            <div>
+              <label htmlFor="email">Login</label> <br />
+              <Field
+                type="email"
+                id="email"
+                name="email"
+                className={errors.email && touched.email ? s.error : ""}
+              />
+              <ErrorMessage name="email" component={Error} />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <br />
+              <Field
+                type="password"
+                id="password"
+                name="password"
+                className={errors.password && touched.password ? s.error : ""}
+              />
+              <ErrorMessage name="password" component={Error} />
+            </div>
+            <div className={s.rememberMe}>
+              <Field type="checkbox" id="rememberMe" name="rememberMe" />
+              <label htmlFor="rememberMe" className={s.rememberMeText}>
+                Remember me
+              </label>
+            </div>
+            <div>
+              <button
+                type="submit"
+                disabled={isSubmitting || errors.email || errors.password}
+              >
+                Log in
+              </button>
+            </div>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

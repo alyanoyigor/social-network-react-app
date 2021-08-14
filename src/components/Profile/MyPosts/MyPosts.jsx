@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
+import { Error } from "../../formik/ErrorMessage";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
@@ -39,17 +40,25 @@ const AddPostForm = (props) => {
       onSubmit={props.onSubmit}
     >
       {(formik) => {
-        const { isSubmitting, errors } = formik;
+        const { isSubmitting, errors, touched } = formik;
         return (
           <Form>
             <div>
-              <Field name="newPostText" as="textarea" cols="80" rows="4" />
+              <Field
+                name="newPostText"
+                as="textarea"
+                cols="80"
+                rows="4"
+                className={
+                  errors.newPostText && touched.newPostText ? s.error : ""
+                }
+              />
             </div>
-            <ErrorMessage name="newPostText" component="div" />
+            <ErrorMessage name="newPostText" component={Error} />
             <div>
               <button
                 type="submit"
-                disabled={formik.isSubmitting || formik.errors.newPostText}
+                disabled={isSubmitting || errors.newPostText}
                 className={s.button}
               >
                 Send
