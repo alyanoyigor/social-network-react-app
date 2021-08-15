@@ -10,14 +10,12 @@ const LoginForm = (props) => {
   let initialValues = {
     email: "",
     password: "",
-    checkbox: false,
+    rememberMe: false,
   };
 
-  let onSubmit = (values, { setSubmitting, resetForm }) => {
-    const { email, password, rememberMe } = values;
-    props.login(email, password, rememberMe);
-    resetForm({ values: { email: "", password: "", checkbox: false } });
-    setSubmitting(false);
+  let onSubmit = (values, actions) => {
+    props.login(values, actions);
+    actions.resetForm();
   };
 
   let validate = (values) => {
@@ -38,7 +36,7 @@ const LoginForm = (props) => {
       onSubmit={onSubmit}
     >
       {(formik) => {
-        const { values, isSubmitting, errors, touched } = formik;
+        const { errors, touched, isValid, status } = formik;
         return (
           <Form>
             <div>
@@ -68,11 +66,9 @@ const LoginForm = (props) => {
                 Remember me
               </label>
             </div>
+            <div>{status}</div>
             <div>
-              <button
-                type="submit"
-                disabled={isSubmitting || errors.email || errors.password}
-              >
+              <button type="submit" disabled={!isValid}>
                 Log in
               </button>
             </div>

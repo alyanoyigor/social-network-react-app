@@ -33,10 +33,16 @@ export const getAuthUserData = () => (dispatch) => {
     }
   });
 };
-export const login = (email, password, rememberMe) => (dispatch) => {
-  authAPI.login(email, password, rememberMe).then((data) => {
+export const login = (values, action) => (dispatch) => {
+  authAPI.login(values).then((data) => {
     if (data.resultCode === 0) {
       dispatch(getAuthUserData());
+      action.setSubmitting(false);
+    } else {
+      const message =
+        data.messages.length > 0 ? data.messages[0] : "Some error";
+      action.setStatus(message);
+      action.setSubmitting(false);
     }
   });
 };
