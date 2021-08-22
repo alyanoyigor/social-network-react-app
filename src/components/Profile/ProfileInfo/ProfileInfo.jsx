@@ -4,6 +4,7 @@ import Facebook from "./../../../assets/img/facebook.svg";
 import yes from "./../../../assets/img/yes.svg";
 import no from "./../../../assets/img/no.svg";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
 	if (!props.profile) {
@@ -18,7 +19,7 @@ const ProfileInfo = (props) => {
 				<h1>{props.profile.fullName}</h1>
 
 				{props.status ? (
-					<ProfileStatus
+					<ProfileStatusWithHooks
 						status={props.status}
 						updateUserStatus={props.updateUserStatus}
 					/>
