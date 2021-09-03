@@ -8,6 +8,7 @@ const initialState = {
   postsData: [
     { id: 1, message: "Post 1", likes: "5" },
     { id: 2, message: "Post 2", likes: "3" },
+    { id: 3, message: "Post 3", likes: "4" },
   ],
   profile: null,
   status: "",
@@ -20,7 +21,7 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         postsData: [
           ...state.postsData,
-          { id: 3, message: action.newPostText, likes: 0 },
+          { id: 4, message: action.newPostText, likes: 0 },
         ],
       };
 
