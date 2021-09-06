@@ -1,9 +1,9 @@
 import { profileAPI } from "../api/api";
 
-const ADD_POST = "ADD-POST";
-const SET_PROFILE = "SET_PROFILE";
-const SET_USER_STATUS = "SET_USER_STATUS";
-const DELETE_POST = "DELETE_POST";
+const ADD_POST = "social-network/profile/ADD-POST";
+const SET_PROFILE = "social-network/profile/SET_PROFILE";
+const SET_USER_STATUS = "social-network/profile/SET_USER_STATUS";
+const DELETE_POST = "social-network/profile/DELETE_POST";
 
 const initialState = {
 	postsData: [
@@ -41,7 +41,9 @@ const profileReducer = (state = initialState, action) => {
 		case DELETE_POST:
 			return {
 				...state,
-				postsData: initialState.postsData.filter((item) => item.id != action.id),
+				postsData: initialState.postsData.filter(
+					(item) => item.id !== action.id
+				),
 			};
 
 		default:
@@ -56,20 +58,17 @@ export const setUserProfile = (profile) => ({ type: SET_PROFILE, profile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
 
 //thunk creators
-export const getUserProfile = (userId) => (dispatch) => {
-	profileAPI.getUserProfile(userId).then((data) => {
-		dispatch(setUserProfile(data));
-	});
+export const getUserProfile = (userId) => async (dispatch) => {
+	let data = await profileAPI.getUserProfile(userId);
+	dispatch(setUserProfile(data));
 };
-export const getUserStatus = (userId) => (dispatch) => {
-	profileAPI.getUserStatus(userId).then((data) => {
-		dispatch(setUserStatus(data));
-	});
+export const getUserStatus = (userId) => async (dispatch) => {
+	let data = await profileAPI.getUserStatus(userId);
+	dispatch(setUserStatus(data));
 };
-export const updateUserStatus = (status) => (dispatch) => {
-	profileAPI.updateUserStatus(status).then((data) => {
-		if (data.resultCode === 0) dispatch(setUserStatus(status));
-	});
+export const updateUserStatus = (status) => async (dispatch) => {
+	let data = await profileAPI.updateUserStatus(status);
+	if (data.resultCode === 0) dispatch(setUserStatus(status));
 };
 
 export default profileReducer;

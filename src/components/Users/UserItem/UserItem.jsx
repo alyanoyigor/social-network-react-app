@@ -3,28 +3,29 @@ import userImage from "./../../../assets/img/image.webp";
 import { NavLink } from "react-router-dom";
 
 const UsersItem = (props) => {
+  const {photos, followingInProgress, unfollow, follow, followed, id, name, status} = props;
   return (
     <div className={s.users}>
-      <NavLink to={"/profile/" + props.id}>
+      <NavLink to={"/profile/" + id}>
         <img
-          src={props.photos.small != null ? props.photos.small : userImage}
+          src={photos.small != null ? photos.small : userImage}
           alt=""
         />
-        <p>{props.name}</p>
+        <p>{name}</p>
       </NavLink>
-      <p>{props.status}</p>
+      <p>{status}</p>
       <div>
-        {props.followed ? (
+        {followed ? (
           <button
-            disabled={props.followingInProgress.some((id) => id === props.id)}
-            onClick={() => props.unfollow(props.id)}
+            disabled={followingInProgress.some((id) => id === id)}
+            onClick={() => unfollow(id)}
           >
             Unfollow
           </button>
         ) : (
           <button
-            disabled={props.followingInProgress.some((id) => id === props.id)}
-            onClick={() => props.follow(props.id)}
+            disabled={followingInProgress.some((id) => id === id)}
+            onClick={() => follow(id)}
           >
             Follow
           </button>

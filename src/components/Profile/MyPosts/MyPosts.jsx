@@ -5,9 +5,7 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-	let postsElements = props.postsData.map((p) => (
-		<Post key={p.id} message={p.message} likes={p.likes} />
-	));
+	let postsElements = props.postsData.map((p) => <Post {...p} />);
 	let handleSubmit = (values, { setSubmitting, resetForm }) => {
 		props.addNewPost(values.newPostText);
 		resetForm({ values: { newPostText: "" } });
